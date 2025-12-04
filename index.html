@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INTERNATIONAL ITEMS | WebShop</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- 🔝 NAVBAR -->
+  <header class="navbar">
+    <div class="nav-container">
+      <h1 class="logo"><span>INTERNATIONAL</span> ITEMS</h1>
+      <nav class="nav-links">
+        <a href="#inicio">Inicio</a>
+        <a href="#productos">Productos</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <button id="cart-btn" class="cart-btn">🛒 <span id="cart-count">0</span></button>
+    </div>
+  </header>
+
+  <!-- 🦋 HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-content">
+      <h2>Tu estilo, tu tienda</h2>
+      <p>Productos modernos, precios irresistibles y calidad garantizada.</p>
+      <p>Lo piensas, Lo tenemos O lo traemos 🛩📦</p>
+      <button class="btn-primary scroll-to" data-target="#productos">Explorar productos</button>
+    </div>
+  </section>
+
+  <!-- 💎 PRODUCTOS -->
+  <section class="products" id="productos">
+<!-- 🏷️ Categorías -->
+<div id="category-bar" class="category-bar"></div>
+    <h2 class="section-title">Nuestros Productos</h2>
+    <!-- 🔎 Banner de resultados de búsqueda -->
+<div id="search-banner" class="search-banner hidden">
+  <span id="search-banner-text"></span>
+  <button id="clear-search" class="search-banner-close" aria-label="Quitar filtro">✕</button>
+</div>
+    <div class="product-grid" id="product-list"></div>
+  </section>
+
+  <!-- 🛒 MODAL CARRITO -->
+  <div id="cart-modal" class="cart-modal hidden">
+    <div class="cart-content">
+      <button id="close-cart" class="close-cart">&times;</button>
+      <h3>🛍️ Tu Carrito</h3>
+      <div id="cart-items"></div>
+      <div class="cart-footer">
+        <p>Total: <span id="cart-total">$0.00</span></p>
+        <button class="btn-checkout" id="checkout-btn">Finalizar compra</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 💳 FORMULARIO DE CHECKOUT -->
+  <div id="checkout-modal" class="cart-modal hidden">
+    <div class="cart-content">
+      <button id="close-checkout" class="close-cart">&times;</button>
+      <h3>📦 Datos de envío</h3>
+
+      <p class="checkout-note">
+        <strong>NOTA:</strong> ESPERAR ENTRE 2-10 MINUTOS EL COSTO DEL ENVÍO YA QUE ESE COSTO ES INDEPENDIENTE DEL ENTREGADOR EN MOTOCICLETA.<br>
+        <strong>SI COMPRAS IGUAL O MÁS DE 2,500 LPS, RECIBES ENVÍO GRATIS</strong> <span class="emoji">😊</span>
+      </p>
+
+<form id="checkout-form" novalidate>
+  <label>Nombre del cliente*</label>
+  <input type="text" name="nombre" required>
+
+
+
+  <label>Referencia (ej. frente a hotel Clarion)*</label>
+  <input type="text" name="referencia" required>
+
+  <label>Número para llamadas 1*</label>
+  <input type="tel" name="telefono1" required>
+
+  <label>Número para llamadas 2 (opcional)</label>
+  <input type="tel" name="telefono2">
+
+  <label>Día que desea el envío*</label>
+  <select name="dia" required>
+    <option value="">Selecciona una opción</option>
+    <option value="Hoy">Hoy</option>
+    <option value="Mañana">Mañana</option>
+    <option value="Otro">Otro (escriba debajo)</option>
+  </select>
+  <input type="text" name="dia_otro" placeholder="Escriba el día si eligió 'Otro'">
+
+  <label>¿De dónde eres?*</label>
+  <select name="ubicacion" required>
+    <option value="">Selecciona una ubicación</option>
+    <option value="Tegucigalpa">Tegucigalpa</option>
+    <option value="Otro departamento">Otro departamento</option>
+  </select>
+
+
+ <label>Vendedor Que te Atendió*</label>
+<select name="vendedor_aten" id="vendedor_aten" required>
+  <option value="">Selecciona un Vendedor</option>
+  <option value="Mayra">Mayra</option>
+  <option value="Edith">Edith</option>
+  <option value="Rigo">Rigo</option>
+  <option value="Otro">Otro</option>
+</select>
+
+<!-- 🆕 Campo oculto que se muestra solo si elige “Otro” -->
+<input
+  type="text"
+  name="vendedor_otro"
+  id="vendedor_otro"
+  placeholder="Escriba el nombre del vendedor"
+  style="display: none; margin-top: 8px;"
+/>
+
+  
+  <label>Dirección de envío*</label>
+<select name="direccion_envio" id="direccion_envio" required>
+  <option value="">Selecciona tu colonia/sector</option>
+</select>
+
+<!-- 📦 Recuadro de costos -->
+<div class="shipping-box" id="shipping-box">
+  <div class="row"><span>Subtotal productos</span><span id="subtotal-checkout">—</span></div>
+  <div class="row"><span>Costo de envío</span><span id="envio-valor">—</span></div>
+  <div class="row total"><span>Total a pagar</span><span id="total-checkout">—</span></div>
+  <small class="hint">Envío GRATIS a partir de L 2,500.</small>
+</div>
+
+  <label>Método de pago*</label>
+  <select name="metodo_pago" required>
+    <option value="">Selecciona un método</option>
+    <option value="Efectivo">💵 Efectivo</option>
+    <option value="Transferencia">💳 Transferencia</option>
+  </select>
+
+  <button type="submit" class="btn-primary">Enviar pedido</button>
+</form>
+    </div>
+  </div>
+
+  <!-- 📞 CONTACTO -->
+  <section class="contact" id="contacto">
+    <h2 class="section-title">Contáctanos</h2>
+    <form id="contact-form" class="contact-form">
+  <input type="text" name="nombre" placeholder="Tu nombre" required>
+  <input type="email" name="correo" placeholder="Tu correo" required>
+  <textarea name="mensaje" placeholder="Tu mensaje..." required></textarea>
+  <button class="btn-primary" type="submit">Enviar mensaje</button>
+  <div id="contact-status" style="text-align:center;font-weight:500;margin-top:.5rem;"></div>
+</form>
+  </section>
+
+  <footer class="footer">
+    <p>© 2025 RAUDA Shop — Todos los derechos reservados</p>
+  </footer>
+ <!-- 🔍 Lightbox con navegación -->
+<div id="image-viewer" class="image-viewer hidden">
+  <button id="viewer-prev" class="viewer-arrow">❮</button>
+  <img id="viewer-img" src="" alt="Vista ampliada">
+  <button id="viewer-next" class="viewer-arrow">❯</button>
+  <span id="close-viewer">&times;</span>
+</div>
+  
+<!-- 🛒 Botón flotante del carrito -->
+<button id="floating-cart" class="floating-cart hidden">
+  🛍️ <span id="floating-cart-count">0</span>
+</button>
+  
+<!-- 🔎 Botón flotante de búsqueda -->
+<button id="floating-search" class="floating-search hidden" aria-label="Buscar productos">🔎</button>
+
+<!-- 🔍 Modal de búsqueda -->
+<div id="search-modal" class="search-modal hidden">
+  <div class="search-content" role="dialog" aria-modal="true" aria-labelledby="search-title">
+    <button id="close-search-modal" class="close-search" aria-label="Cerrar">×</button>
+    <h3 id="search-title">Buscar productos</h3>
+    <div class="search-bar">
+      <input id="fs-input" type="text" placeholder="Nombre, descripción o precio..." autocomplete="off" />
+      <button id="search-confirm" class="btn-search">Buscar</button>
+    </div>
+    <p class="search-hint">Consejos: prueba “powerbank”, “cámara”, “300”, “HNL 140”, etc.</p>
+  </div>
+</div>
+
+<!-- ✅ SDK EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof emailjs === "undefined") { console.error("❌ EmailJS no cargó correctamente"); return; }
+    emailjs.init("XwKAz-6miwjRCNBcd");   // ← tu Public Key
+  });
+</script>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
