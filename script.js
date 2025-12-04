@@ -5,7 +5,7 @@
 // === LISTA DE PRODUCTOS ===
 const products = [
   // === agregado 3 diciembre ===
-  {
+{
   name: "iPhone 8 Plus 256GB 100% BATERIA 10/10",
   price: 3600.00,
   categories: ["iPhone"],
@@ -23,6 +23,65 @@ const products = [
     "images/iphone86.jpg",
     "images/iphone87.jpg",
     "images/iphone88.jpg"
+  ]
+},
+{
+  name: "Xiaomi Redmi Note 12 Pro 5G 256GB",
+  price: 2300.0,
+  categories: ["Tecnologia y Juegos", "Celulares y Tablets"],
+  description: [
+    "ENVIO GRATIS EN TODO HONDURAS",
+    "CON SU OTHERBOX GRATIS",
+    "CARGADOR GRATIS"
+  ],
+  images: [
+    "images/redmix1.jpg",
+    "images/redmix2.jpg",
+    "images/redmix3.jpg",
+    "images/redmix4.jpg",
+    "images/redmix5.jpg",
+    "images/redmix6.jpg",
+    "images/redmix7.jpg",
+    "images/redmix8.jpg",
+    "images/redmix9.jpg"
+  ]
+},
+{
+  name: "Nokia G11 Plus 64GB con cargador",
+  price: 1500.0,
+  categories: ["Tecnologia y Juegos", "Celulares y Tablets"],
+  description: [
+    "ENVIO TOTALMENTE GRATIS EN TODO HONDURAS",
+    "CARGADOR GRATIS Y AURICULARES",
+    "NITIDO EN BUENAS CONDICIONES"
+  ],
+  images: [
+    "images/nokiag1.jpg",
+    "images/nokiag2.jpg",
+    "images/nokiag3.jpg",
+    "images/nokiag4.jpg",
+    "images/nokiag5.jpg",
+    "images/nokiag6.jpg",
+    "images/nokiag7.jpg",
+    "images/nokiag8.jpg"
+  ]
+},
+ {
+  name: "iPhone 14 Pro Max 256GB 100% BATERIA",
+  price: 14500.0,
+  categories: ["Tecnologia y Juegos", "Celulares y Tablets"],
+  description: [
+    "ENVIO, VIDRIO DE CAMARAS GRATIS",
+    "CARGADOR CARGA RAPIDA 20W GRATIS",
+    "VIDRIO PANTALLA GRATIS"
+  ],
+  images: [
+    "images/ip14pm1.jpg",
+    "images/ip14pm2.jpg",
+    "images/ip14pm3.jpg",
+    "images/ip14pm4.jpg",
+    "images/ip14pm5.jpg",
+    "images/ip14pm6.jpg"
   ]
 },
   {
