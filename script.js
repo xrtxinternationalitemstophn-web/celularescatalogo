@@ -6,7 +6,7 @@
 const products = [
   // === agregado 3 diciembre ===
 {
-  name: "iPhone 8 Plus 256GB 100% BATERIA 10/10",
+  name: "iPhone 8 Plus 256GB 100% BATERIA 10/10 DISPONIBLE EN 10 DIAS",
   price: 3600.00,
   categories: ["iPhone"],
   description: [
@@ -1421,6 +1421,7 @@ renderProducts();
 
 /* === INICIO === */
 /*renderProducts();*/
+
 
 
 
