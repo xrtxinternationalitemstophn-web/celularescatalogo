@@ -92,9 +92,53 @@ const products = [
     "images/tabs102.jpg",
     "images/tabs103.jpg"
   ]
+},
+{
+  name: "Smart TV Hisense 58 pulgadas 4K ENVIO GRATIS TODO HONDURAS NUEVO SELLADO‼️",
+  price: 10700.0,
+  categories: ["TV y Smart TV"],
+  description: [
+    "Pantalla gigante de 58 pulgadas con resolución 4K Ultra HD 📺✨. Vive el fútbol, películas y juegos con colores más vivos y detalles que impresionan.",
+    "Tecnología Dolby Vision + Escalador 4K con IA 🤖🎥 — imagen más brillante, suave y realista. ¡La misma marca patrocinadora oficial de la FIFA!",
+    "Producto nuevo y sellado, modelo 2024 ⭐. Envío GRATIS a todo Honduras 🇭🇳🚚. ¡Llévatela hoy y convierte tu sala en un cine!"
+  ],
+  images: [
+    "images/hiss1.jpg",
+    "images/hiss2.jpg",
+    "images/hiss3.jpg"
+  ]
+},
+{
+  name: "TV Led Tekno 32 pulgadas ENVIO GRATIS TODO HONDURAS NUEVO SELLADO",
+  price: 2700.0,
+  categories: ["TV y Smart TV"],
+  description: [
+    "Pantalla de 32 pulgadas con colores vivos y excelente claridad 📺✨. Ideal para cuartos, salas pequeñas o negocios. ¡Se mira nítida desde cualquier ángulo!",
+    "Con 2 HDMI + 2 USB 🔌⚡ perfectos para conectar Roku, decodificadores, consolas, memorias USB y mucho más. ¡Listo para disfrutar al instante!",
+    "Producto nuevo, sellado y garantizado 🆕📦. Incluye envío GRATIS a todo Honduras 🚚🇭🇳. ¡Aprovecha antes que se agoten!"
+  ],
+  images: [
+    "images/tekk1.jpg",
+    "images/tekk2.jpg"
+  ]
+},
+{
+  name: "Smart TV Hisense 32 Pulgadas NUEVO SELLADO GARANTIA 6 MESES ENVIO GRATIS TODO HONDURAS‼️",
+  price: 4000.0,
+  categories: ["TV y Smart TV"],
+  description: [
+    "Smart TV Hisense 32” con sistema VIDAA: rápido, moderno e ideal para Netflix, YouTube, Prime Video y más 📺✨. ¡Colores vivos y audio nítido!",
+    "Producto nuevo, sellado de fábrica 📦💯. Incluye 6 meses de garantía para que compres con total confianza. Perfecta para cuarto o sala.",
+    "Envío GRATIS a todo Honduras 🇭🇳🚚. Fácil de instalar, ligera y lista para usar. ¡Conéctala y disfruta tu contenido favorito al instante!"
+  ],
+  images: [
+    "images/hissx1.jpg",
+    "images/hissx2.jpg",
+    "images/hissx3.jpg"
+  ]
 }
 
-
+// ===  "Todos" "Android" "iPhone""Tablets y iPads" "TV y Smart TV""Otros"===
 
 
 
