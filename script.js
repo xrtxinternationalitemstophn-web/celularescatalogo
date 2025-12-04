@@ -28,7 +28,7 @@ const products = [
 {
   name: "Xiaomi Redmi Note 12 Pro 5G 256GB",
   price: 2300.0,
-  categories: ["Tecnologia y Juegos", "Celulares y Tablets"],
+  categories: ["Android"],
   description: [
     "ENVIO GRATIS EN TODO HONDURAS",
     "CON SU OTHERBOX GRATIS",
@@ -49,7 +49,7 @@ const products = [
 {
   name: "Nokia G11 Plus 64GB con cargador",
   price: 1500.0,
-  categories: ["Tecnologia y Juegos", "Celulares y Tablets"],
+  categories: ["Android"],
   description: [
     "ENVIO TOTALMENTE GRATIS EN TODO HONDURAS",
     "CARGADOR GRATIS Y AURICULARES",
@@ -69,7 +69,7 @@ const products = [
  {
   name: "iPhone 14 Pro Max 256GB 100% BATERIA",
   price: 14500.0,
-  categories: ["Tecnologia y Juegos", "Celulares y Tablets"],
+  categories: ["iPhone"],
   description: [
     "ENVIO, VIDRIO DE CAMARAS GRATIS",
     "CARGADOR CARGA RAPIDA 20W GRATIS",
