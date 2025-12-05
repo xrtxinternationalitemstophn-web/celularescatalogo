@@ -935,7 +935,7 @@ const DIRECCIONES_EDITH_RIGO = [
 ];
 
 // Helpers
-function HNL(v){ return (v||0).toLocaleString('es-HN',{style:'currency',currency:'HNL'}); }
+function L(v){ return (v||0).toLocaleString('es-HN',{style:'currency',currency:'L'}); }
 function cartSubtotal(){
   try { return cart.reduce((s,i)=> s + (Number(i.price)||0)*(Number(i.qty)||1), 0); }
   catch { return 0; }
