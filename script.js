@@ -7,7 +7,7 @@ const products = [
   // === agregado 3 diciembre ===
   {
   name: "iPhone 15 Pro Max 256GB 86% ENVIOS GRATIS TODO HONDURAS",
-  price: 18000.0,
+  price: 18000.00,
   categories: ["Tecnologia y Juegos", "Celulares y Tablets"],
   description: [
     "⭐ INCLUYE: VIDRIO PARA CAMARAS COMPLETO DE DOBLE REFUERZO",
@@ -46,7 +46,7 @@ const products = [
 },
 {
   name: "Xiaomi Redmi Note 12 Pro 5G 256GB + FocoCamara GRATIS",
-  price: 2300.0,
+  price: 2300.00,
   categories: ["Android"],
   description: [
     "ENVIO GRATIS EN TODO HONDURAS",
@@ -67,7 +67,7 @@ const products = [
 },
 {
   name: "Nokia G11 Plus 64GB con cargador",
-  price: 1500.0,
+  price: 1500.00,
   categories: ["Android"],
   description: [
     "ENVIO TOTALMENTE GRATIS EN TODO HONDURAS",
@@ -87,7 +87,7 @@ const products = [
 },
  {
   name: "iPhone 14 Pro Max 256GB 100% BATERIA",
-  price: 14500.0,
+  price: 14500.00,
   categories: ["iPhone"],
   description: [
     "ENVIO, VIDRIO DE CAMARAS GRATIS",
@@ -173,7 +173,7 @@ const products = [
 },
 {
   name: "Smart TV Hisense 58 pulgadas 4K ENVIO GRATIS TODO HONDURAS NUEVO SELLADO‼️",
-  price: 10500.0,
+  price: 10500.00,
   categories: ["TV y Smart TV"],
   description: [
     "Pantalla gigante de 58 pulgadas con resolución 4K Ultra HD 📺✨. Vive el fútbol, películas y juegos con colores más vivos y detalles que impresionan.",
@@ -188,7 +188,7 @@ const products = [
 },
 {
   name: "TV Led Tekno 32 pulgadas ENVIO GRATIS TODO HONDURAS NUEVO SELLADO",
-  price: 2500.0,
+  price: 2500.00,
   categories: ["TV y Smart TV"],
   description: [
     "Pantalla de 32 pulgadas con colores vivos y excelente claridad 📺✨. Ideal para cuartos, salas pequeñas o negocios. ¡Se mira nítida desde cualquier ángulo!",
@@ -202,7 +202,7 @@ const products = [
 },
 {
   name: "Smart TV Hisense 32 Pulgadas NUEVO SELLADO GARANTIA 6 MESES ENVIO GRATIS TODO HONDURAS‼️",
-  price: 3800.0,
+  price: 3800.00,
   categories: ["TV y Smart TV"],
   description: [
     "Smart TV Hisense 32” con sistema VIDAA: rápido, moderno e ideal para Netflix, YouTube, Prime Video y más 📺✨. ¡Colores vivos y audio nítido!",
