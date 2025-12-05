@@ -5,6 +5,25 @@
 // === LISTA DE PRODUCTOS ===
 const products = [
   // === agregado 3 diciembre ===
+  {
+  name: "iPhone 15 Pro Max 256GB 86% ENVIOS GRATIS TODO HONDURAS",
+  price: 18000.0,
+  categories: ["Tecnologia y Juegos", "Celulares y Tablets"],
+  description: [
+    "⭐ INCLUYE: VIDRIO PARA CAMARAS COMPLETO DE DOBLE REFUERZO",
+    "⭐ CARGADOR 20W CARGA RAPIDA GRATIS",
+    "⭐ VIDRIO PANTALLA Y SI NECESITA INSTALACIÓN ES GRATIS"
+  ],
+  images: [
+    "images/ip15pm1.jpg",
+    "images/ip15pm2.jpg",
+    "images/ip15pm3.jpg",
+    "images/ip15pm4.jpg",
+    "images/ip15pm5.jpg",
+    "images/ip15pm6.jpg",
+    "images/ip15pm7.jpg"
+  ]
+},
 {
   name: "iPhone 8 Plus 256GB 100% BATERIA 10/10 DISPONIBLE EN 10 DIAS",
   price: 3600.00,
@@ -139,7 +158,7 @@ const products = [
 },
  {
   name: "Samsung Tab S10 FE 128GB 6 MESES DE GARANTIA NUEVA CON SU S-PEN NUEVA DE CAJA",
-  price: 9500.00,
+  price: 9200.00,
   categories: ["Android", "Tablets y iPads"],
   description: [
     "Rendimiento superior y fluido, ideal para trabajo, estudio y entretenimiento con su procesador optimizado.",
@@ -154,7 +173,7 @@ const products = [
 },
 {
   name: "Smart TV Hisense 58 pulgadas 4K ENVIO GRATIS TODO HONDURAS NUEVO SELLADO‼️",
-  price: 10700.0,
+  price: 10500.0,
   categories: ["TV y Smart TV"],
   description: [
     "Pantalla gigante de 58 pulgadas con resolución 4K Ultra HD 📺✨. Vive el fútbol, películas y juegos con colores más vivos y detalles que impresionan.",
@@ -169,7 +188,7 @@ const products = [
 },
 {
   name: "TV Led Tekno 32 pulgadas ENVIO GRATIS TODO HONDURAS NUEVO SELLADO",
-  price: 2700.0,
+  price: 2500.0,
   categories: ["TV y Smart TV"],
   description: [
     "Pantalla de 32 pulgadas con colores vivos y excelente claridad 📺✨. Ideal para cuartos, salas pequeñas o negocios. ¡Se mira nítida desde cualquier ángulo!",
@@ -183,7 +202,7 @@ const products = [
 },
 {
   name: "Smart TV Hisense 32 Pulgadas NUEVO SELLADO GARANTIA 6 MESES ENVIO GRATIS TODO HONDURAS‼️",
-  price: 4000.0,
+  price: 3800.0,
   categories: ["TV y Smart TV"],
   description: [
     "Smart TV Hisense 32” con sistema VIDAA: rápido, moderno e ideal para Netflix, YouTube, Prime Video y más 📺✨. ¡Colores vivos y audio nítido!",
@@ -1421,6 +1440,7 @@ renderProducts();
 
 /* === INICIO === */
 /*renderProducts();*/
+
 
 
 
