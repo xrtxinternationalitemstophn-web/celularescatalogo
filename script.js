@@ -1433,6 +1433,60 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+/******************************************
+ * ⚡ CYBER WEEK COUNTDOWN (PRO)
+ ******************************************/
+(function cyberWeekCountdown(){
+  const $ = (id) => document.getElementById(id);
+
+  const daysEl = $("cw-days");
+  const hoursEl = $("cw-hours");
+  const minsEl = $("cw-mins");
+  const secsEl = $("cw-secs");
+
+  if (!daysEl || !hoursEl || !minsEl || !secsEl) return;
+
+  // ✅ OPCIÓN A (rápida): cuenta desde el momento que abre la página
+  const START_DAYS = 6;
+  const START_HOURS = 23;
+  const end = new Date(Date.now() + (START_DAYS * 24 + START_HOURS) * 60 * 60 * 1000);
+
+  // ✅ OPCIÓN B (fecha fija): descomenta y pon tu fecha real
+  // const end = new Date("2025-12-31T23:59:59-06:00");
+
+  function pad(n){ return String(n).padStart(2, "0"); }
+
+  function tick(){
+    const now = Date.now();
+    let diff = end.getTime() - now;
+
+    if (diff <= 0){
+      daysEl.textContent = "00";
+      hoursEl.textContent = "00";
+      minsEl.textContent = "00";
+      secsEl.textContent = "00";
+      const wrap = document.getElementById("cyber-countdown");
+      if (wrap) wrap.setAttribute("data-ended", "true");
+      return;
+    }
+
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    diff %= (1000 * 60 * 60 * 24);
+    const h = Math.floor(diff / (1000 * 60 * 60));
+    diff %= (1000 * 60 * 60);
+    const m = Math.floor(diff / (1000 * 60));
+    const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+    daysEl.textContent = pad(d);
+    hoursEl.textContent = pad(h);
+    minsEl.textContent = pad(m);
+    secsEl.textContent = pad(s);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+})();
+
 
 /* === INICIO === */
 renderProducts();
