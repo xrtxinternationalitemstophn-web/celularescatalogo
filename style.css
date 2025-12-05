@@ -1277,6 +1277,23 @@ body.modal-open {
   }
 }
 
+.cyber-title-sub{
+  margin-left: 8px;
+  font-weight: 700;
+  opacity: .95;
+}
+
+@media (max-width: 600px){
+  .cyber-title-sub{
+    display: block;   /* ✅ se va a la segunda línea */
+    margin-left: 0;
+    font-size: 14px;
+    opacity: .9;
+  }
+}
+
+
+
 
 
 
