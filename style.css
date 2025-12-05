@@ -1132,7 +1132,8 @@ body.modal-open {
   text-shadow:
     0 0 10px rgba(255,60,120,0.35),
     0 0 10px rgba(0,120,255,0.35);
-  white-space: nowrap;
+  white-space: normal;  /* ✅ permite salto */
+  line-height: 1.15;
 }
 
 .cyber-subtitle{
@@ -1229,6 +1230,54 @@ body.modal-open {
   .cyber-unit{ min-width: 52px; }
   .cyber-num{ font-size: 18px; }
 }
+
+@media (max-width: 600px){
+  .cyber-week-inner{
+    grid-template-columns: 1fr; /* todo en una columna */
+    gap: 10px;
+    padding: 10px 12px;
+  }
+
+  .cyber-left{
+    flex-wrap: wrap; /* ✅ permite que el texto baje */
+    align-items: center;
+  }
+
+  .cyber-badge{
+    font-size: 20px;
+  }
+
+  .cyber-title{
+    font-size: 16px;      /* más compacto */
+    white-space: normal; /* ✅ esencial */
+    line-height: 1.2;
+  }
+
+  .cyber-subtitle{
+    display: none; /* ✅ no estorba en móvil */
+  }
+
+  .cyber-right{
+    text-align: left;
+  }
+
+  .cyber-digital{
+    justify-content: flex-start;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .cyber-unit{
+    min-width: 50px;
+    padding: 6px 7px;
+  }
+
+  .cyber-num{
+    font-size: 17px;
+  }
+}
+
+
 
 
 
