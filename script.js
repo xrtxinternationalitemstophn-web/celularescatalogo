@@ -1434,38 +1434,54 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 /******************************************
- * ⚡ CYBER WEEK COUNTDOWN (PRO)
+ * ⚡ CYBER WEEK COUNTDOWN (PRO - NO REINICIA)
  ******************************************/
 (function cyberWeekCountdown(){
   const $ = (id) => document.getElementById(id);
 
-  const daysEl = $("cw-days");
+  const daysEl  = $("cw-days");
   const hoursEl = $("cw-hours");
-  const minsEl = $("cw-mins");
-  const secsEl = $("cw-secs");
+  const minsEl  = $("cw-mins");
+  const secsEl  = $("cw-secs");
 
   if (!daysEl || !hoursEl || !minsEl || !secsEl) return;
 
-  // ✅ OPCIÓN A (rápida): cuenta desde el momento que abre la página
+  // Duración deseada
   const START_DAYS = 6;
   const START_HOURS = 23;
-  const end = new Date(Date.now() + (START_DAYS * 24 + START_HOURS) * 60 * 60 * 1000);
 
-  // ✅ OPCIÓN B (fecha fija): descomenta y pon tu fecha real
-  // const end = new Date("2025-12-31T23:59:59-06:00");
+  // ✅ ID de campaña para que no se mezcle con otras promos futuras
+  const CAMPAIGN_ID = "cyber-week-2025";
+  const LS_KEY = `cw_end_ts_${CAMPAIGN_ID}`;
+
+  const durationMs =
+    ((START_DAYS * 24) + START_HOURS) * 60 * 60 * 1000;
+
+  let endTs = Number(localStorage.getItem(LS_KEY));
+  const now = Date.now();
+
+  // Si no existe, o ya terminó, creamos uno nuevo y lo guardamos
+  if (!endTs || !Number.isFinite(endTs) || endTs <= now) {
+    endTs = now + durationMs;
+    localStorage.setItem(LS_KEY, String(endTs));
+  }
+
+  // (Opcional) función de reseteo manual para ti
+  // window.resetCyberWeek = () => { localStorage.removeItem(LS_KEY); location.reload(); };
 
   function pad(n){ return String(n).padStart(2, "0"); }
 
   function tick(){
     const now = Date.now();
-    let diff = end.getTime() - now;
+    let diff = endTs - now;
+
+    const wrap = document.getElementById("cyber-countdown");
 
     if (diff <= 0){
       daysEl.textContent = "00";
       hoursEl.textContent = "00";
       minsEl.textContent = "00";
       secsEl.textContent = "00";
-      const wrap = document.getElementById("cyber-countdown");
       if (wrap) wrap.setAttribute("data-ended", "true");
       return;
     }
@@ -1477,15 +1493,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const m = Math.floor(diff / (1000 * 60));
     const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-    daysEl.textContent = pad(d);
+    daysEl.textContent  = pad(d);
     hoursEl.textContent = pad(h);
-    minsEl.textContent = pad(m);
-    secsEl.textContent = pad(s);
+    minsEl.textContent  = pad(m);
+    secsEl.textContent  = pad(s);
   }
 
   tick();
   setInterval(tick, 1000);
 })();
+
 
 
 /* === INICIO === */
@@ -1494,6 +1511,7 @@ renderProducts();
 
 /* === INICIO === */
 /*renderProducts();*/
+
 
 
 
