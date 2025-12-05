@@ -45,7 +45,7 @@ const products = [
   ]
 },
 {
-  name: "Xiaomi Redmi Note 12 Pro 5G 256GB",
+  name: "Xiaomi Redmi Note 12 Pro 5G 256GB + FocoCamara GRATIS",
   price: 2300.0,
   categories: ["Android"],
   description: [
