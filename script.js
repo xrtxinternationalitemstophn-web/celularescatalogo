@@ -242,9 +242,15 @@ if (window.emailjs) {
 }
 
 
-// === FORMATEADOR DE MONEDA ===
-const formatLempiras = amount =>
-  new Intl.NumberFormat("es-HN", { style: "currency", currency: "HNL" }).format(amount);
+// === FORMATEADOR DE MONEDA === (personalizado sin decimales y con L)
+function formatLempiras(amount) {
+  if (isNaN(amount)) amount = 0;
+  return "L " + Number(amount).toLocaleString("es-HN", {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  });
+}
+
 
 const productList = document.getElementById("product-list");
 const cartBtn = document.getElementById("cart-btn");
@@ -962,9 +968,10 @@ function updateCheckoutTotals(){
   const subEl = document.getElementById('subtotal-checkout');
   const envEl = document.getElementById('envio-valor');
   const totEl = document.getElementById('total-checkout');
-  if (subEl) subEl.textContent = HNL(sub);
-  if (envEl) envEl.textContent = env === 0 ? 'GRATIS' : HNL(env);
-  if (totEl) totEl.textContent = HNL(sub + env);
+  if (subEl) subEl.textContent = formatLempiras(sub);
+  if (envEl) envEl.textContent = env === 0 ? "GRATIS" : formatLempiras(env);
+  if (totEl) totEl.textContent = formatLempiras(sub + env);
+
 }
 
 // Eventos iniciales
