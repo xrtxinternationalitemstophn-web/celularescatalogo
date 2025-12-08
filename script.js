@@ -1001,8 +1001,11 @@ function getVendedor() {
 
 
 
-/* === ENVÍO CON EMAILJS (incluye envío y redirección si es “Tarjeta”) === */
-checkoutForm.addEventListener("submit", async (e) => {
+/* === ENVÍO DE PEDIDO POR WHATSAPP ===
+   Reemplaza el bloque anterior de EmailJS por este
+   Envía el resumen del carrito al WhatsApp +50496310102
+*/
+checkoutForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
   // 1) Validación rápida de obligatorios
@@ -1016,96 +1019,78 @@ checkoutForm.addEventListener("submit", async (e) => {
   if (!ok) { showToast("⚠️ Completa los campos obligatorios."); return; }
   if (!cart.length) { showToast("Tu carrito está vacío 🛒"); return; }
 
-  // 2) Totales + envío según dirección
-  const subtotal = cart.reduce((s,i)=> s + (i.price * i.qty), 0);
+  // 2) Totales + envío según dirección seleccionada
+  const subtotal = getCartSubtotal();
+  const { area, cost } = getSelectedShipping();
+  if (!area) { showToast("Selecciona la dirección de envío."); return; }
 
-  const sel = document.getElementById("direccion_envio");
-  if (!sel || !sel.value) { showToast("Selecciona la dirección de envío."); return; }
-  const area = sel.value;
-  const base = Number(sel.options[sel.selectedIndex].dataset.cost || 0);
-  const shipping = subtotal >= 2500 ? 0 : base;
+  const shipping = computeShippingCost(subtotal, cost);
   const total = subtotal + shipping;
 
-  // 3) Items del pedido como texto
-  const itemsTxt = cart.map(i => `- ${i.name}: ${formatLempiras(i.price)} × ${i.qty}`).join("\n");
+  // 3) Datos del cliente
+  const nombre = (checkoutForm.nombre?.value || "").trim();
+  const telefono = [checkoutForm.telefono1?.value, checkoutForm.telefono2?.value]
+    .map(v => (v || "").trim())
+    .filter(Boolean)
+    .join(" / ");
 
-// 4) Parámetros para EmailJS (ajustado a tu nueva plantilla)
-const vendedor = (() => {
-  const vsel = checkoutForm.vendedor_aten?.value || "";
-  if (vsel === "Otro") {
-    const nom = (checkoutForm.vendedor_otro?.value || "").trim();
-    return nom; // si está vacío, validamos abajo
-  }
-  return vsel;
-})();
+  const ubicacion = (checkoutForm.ubicacion?.value || "").trim();
 
-if (!vendedor) {
-  showToast("⚠️ Escribe el nombre del vendedor (elegiste ‘Otro’).");
-  return;
-}
+  const vendedor = (() => {
+    const vsel = (checkoutForm.vendedor_aten?.value || "").trim();
+    if (vsel === "Otro") return (checkoutForm.vendedor_otro?.value || "").trim();
+    return vsel;
+  })();
 
-const telefono = [checkoutForm.telefono1?.value, checkoutForm.telefono2?.value]
-  .map(v => (v || "").trim())
-  .filter(Boolean)
-  .join(" / ");
-
-const direccion = area + (checkoutForm.referencia?.value
-  ? " — " + checkoutForm.referencia.value.trim()
-  : "");
-
-const comentario = (checkoutForm.dia?.value === "Otro"
-  ? (checkoutForm.dia_otro?.value || "Otro")
-  : (checkoutForm.dia?.value || ""));
-
-// Lo que tu plantilla espera: {{nombre}}, {{telefono}}, {{direccion}}, {{comentario}}, {{pedido}}, {{vendedor}}
-const pedido = itemsTxt;
-
-const params = {
-  nombre:       checkoutForm.nombre?.value || "",
-  telefono,     // 👈 combinado 1 y 2
-  direccion,    // 👈 colonia/sector + referencia
-  comentario,   // 👈 día solicitado
-  vendedor,     // 👈 unificado (Mayra/Edith/Rigo u “Otro” escrito)
-  metodo_pago:  checkoutForm.metodo_pago?.value || "",
-  pedido,       // 👈 productos (antes era "items")
-  subtotal:     formatLempiras(subtotal),
-  costo_envio:  shipping === 0 ? "GRATIS" : formatLempiras(shipping),
-  total:        formatLempiras(total)
-};
-
-
-
-  // 5) Enviar con EmailJS
-  try {
-    if (!window.emailjs) throw new Error("EmailJS no disponible");
-    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_PEDIDOS_TEMPLATE, params);
-  } catch (err) {
-    console.warn("EmailJS error:", err);
-    showToast("⚠️ No se pudo enviar el pedido. Revisa tu conexión.");
+  if (!vendedor) {
+    showToast("⚠️ Escribe el nombre del vendedor (elegiste ‘Otro’).");
     return;
   }
 
-  // 6) Flujo según método de pago
-  const metodo = (checkoutForm.metodo_pago?.value || "").toLowerCase();
+  const referencia = (checkoutForm.referencia?.value || "").trim();
+  const direccion = area + (referencia ? " — " + referencia : "");
 
-  // Si luego agregas “Tarjeta” en el select, redirigimos a pago_integrado
-  if (metodo === "tarjeta") {
-    try {
-      localStorage.setItem("cart", JSON.stringify(cart));
-      localStorage.setItem("cart_snapshot", JSON.stringify(cart));
-      localStorage.setItem("cart_last_total", String(subtotal));
-      localStorage.setItem("shipping_snapshot", JSON.stringify({ area, baseCost: base, shipping, subtotal, total }));
-    } catch {}
-    showToast("Procesando pago con tarjeta…");
-    setTimeout(() => {
-      const payload = encodeURIComponent(JSON.stringify(cart));
-      window.location.href = "pago_integrado.html?c=" + payload;
-    }, 1500);
-    return;
-  }
+  const dia = (checkoutForm.dia?.value === "Otro")
+    ? ((checkoutForm.dia_otro?.value || "").trim() || "Otro")
+    : ((checkoutForm.dia?.value || "").trim());
 
-  // Efectivo / Transferencia
-  showToast("✅ Pedido enviado. ¡Gracias!");
+  const metodoPago = (checkoutForm.metodo_pago?.value || "").trim();
+
+  // 4) Items del pedido + links
+  const baseURL = `${window.location.origin}${window.location.pathname}`;
+  const itemsTxt = cart.map(i => {
+    const slug = slugify(i.name);
+    const link = `${baseURL}#product-${slug}`;
+    return `- ${i.qty} × ${i.name} (${formatLempiras(i.price)} c/u)\n  ${link}`;
+  }).join("\n");
+
+  // 5) Mensaje final
+  const msg =
+`🛒 *Nuevo pedido*
+* Cliente: ${nombre}
+* Tel: ${telefono || "—"}
+* De: ${ubicacion || "—"}
+* Dirección: ${direccion}
+* Día de envío: ${dia || "—"}
+* Vendedor: ${vendedor}
+* Pago: ${metodoPago || "—"}
+
+📦 *Productos*
+${itemsTxt}
+
+* Subtotal: ${formatLempiras(subtotal)}
+* Envío: ${shipping === 0 ? "GRATIS" : formatLempiras(shipping)}
+* *Total: ${formatLempiras(total)}*`;
+
+  const waNumber = "50496310102";
+  const waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
+
+  // 6) Abrir WhatsApp
+  const win = window.open(waLink, "_blank");
+  if (!win) window.location.href = waLink;
+
+  // 7) Limpiar y cerrar carrito (puedes quitar esto si no querés)
+  showToast("📲 Abriendo WhatsApp…");
   checkoutForm.reset();
   cart = [];
   updateCart();
